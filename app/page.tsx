@@ -1,65 +1,103 @@
+"use client";
+
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { motion, AnimatePresence } from "framer-motion";
+import confetti from "canvas-confetti";
+import { Card } from "@/components/ui/Card";
+import { Button } from "@/components/ui/Button";
 import Image from "next/image";
 
 export default function Home() {
+  const router = useRouter();
+  const [noBtnPosition, setNoBtnPosition] = useState({ x: 0, y: 0 });
+  const [isHovered, setIsHovered] = useState(false);
+
+  // Function to move the 'No' button
+  const moveNoButton = () => {
+    const x = Math.random() * 200 - 100; // -100 to 100
+    const y = Math.random() * 200 - 100; // -100 to 100
+    setNoBtnPosition({ x, y });
+    setIsHovered(true);
+  };
+
+  const handleYesClick = () => {
+    const duration = 3000;
+    const end = Date.now() + duration;
+
+    (function frame() {
+      confetti({
+        particleCount: 5,
+        angle: 60,
+        spread: 55,
+        origin: { x: 0 },
+        colors: ["#6B3FA0", "#ffffff"], // Royal Purple & White
+      });
+      confetti({
+        particleCount: 5,
+        angle: 120,
+        spread: 55,
+        origin: { x: 1 },
+        colors: ["#6B3FA0", "#ffffff"],
+      });
+
+      if (Date.now() < end) {
+        requestAnimationFrame(frame);
+      }
+    })();
+
+    setTimeout(() => {
+      router.push("/schedule");
+    }, 1500);
+  };
+
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
+    <div className="flex items-center justify-center min-h-[80vh] px-4">
+      <Card className="max-w-xl w-full text-center space-y-8 relative overflow-hidden">
+        <div className="space-y-4 flex flex-col items-center">
+          <div className="w-32 h-32 relative mb-4">
             <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
+              src="/cute_pineapple_transparent.png"
+              alt="Cute Pineapple"
+              fill
+              className="object-contain mix-blend-multiply"
+              priority
             />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+          </div>
+          <h1 className="text-3xl md:text-5xl font-bold text-black lowercase drop-shadow-sm">
+            jasleen will you be my valentine?
+          </h1>
         </div>
-      </main>
+
+        <div className="flex flex-col md:flex-row gap-6 justify-center items-center h-24 relative">
+          <Button
+            size="lg"
+            onClick={handleYesClick}
+            className="px-12 py-6 text-2xl font-bold bg-[#6B3FA0] hover:bg-[#553280] shadow-[#6B3FA0]/30 z-10 transform hover:scale-110 transition-all text-white"
+          >
+            YES
+          </Button>
+
+          <motion.div
+            animate={{ x: noBtnPosition.x, y: noBtnPosition.y }}
+            transition={{ type: "spring", stiffness: 300, damping: 20 }}
+            onHoverStart={moveNoButton}
+            onClick={moveNoButton}
+            className="absolute md:static z-20"
+          >
+            <Button
+              variant="secondary"
+              size="sm"
+              className="px-4 py-2 text-sm bg-gray-200 hover:bg-gray-300 text-gray-700 border-gray-300 border"
+            >
+              No
+            </Button>
+          </motion.div>
+        </div>
+        <div className="absolute bottom-4 left-0 right-0 text-center">
+          <p className="text-xs text-gray-400">try to press on the no i dare you</p>
+        </div>
+      </Card>
     </div>
   );
 }
