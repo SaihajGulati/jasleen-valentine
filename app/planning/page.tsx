@@ -17,7 +17,7 @@ export default function PlanningPage() {
 
     const getSurpriseText = (val: number) => {
         if (val < 20) return "just tell me when to be ready ⏰";
-        if (val < 40) return "i need at least a packing or dressing list... 🧳";
+        if (val < 40) return "i need just a packing or dressing list... 🧳";
         if (val < 60) return "give me hints, but keep it a secret! 🤫";
         if (val < 80) return "tell me some things but not others 🫣";
         return "tell me exactly where we're going and when.📍";
