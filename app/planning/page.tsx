@@ -24,7 +24,7 @@ export default function PlanningPage() {
     };
 
     const getInputText = (val: number) => {
-        if (val < 20) return "you got saihaj! i am good with anything 🎁";
+        if (val < 20) return "you got it saihaj! i am good with anything 🎁";
         if (val < 40) return "give me a few options for overall plans to approve ✅";
         if (val < 60)
             return "let me pick between specific vibes or foods or activities 🍝";
