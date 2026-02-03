@@ -95,7 +95,7 @@ export default function Home() {
           </motion.div>
         </div>
         <div className="absolute bottom-4 left-0 right-0 text-center">
-          <p className="text-xs text-gray-400">try to press on the no i dare you</p>
+          <p className="text-xs text-gray-400"><s>try to press on the no i dare you</s> i bet you won't click yes</p>
         </div>
       </Card>
     </div>
