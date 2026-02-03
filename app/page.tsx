@@ -69,7 +69,7 @@ export default function Home() {
           </h1>
         </div>
 
-        <div className="flex flex-col md:flex-row gap-6 justify-center items-center h-24 relative">
+        <div className="flex flex-col md:flex-row gap-6 justify-center items-center min-h-40 md:h-24 relative">
           <Button
             size="lg"
             onClick={handleYesClick}
@@ -83,7 +83,7 @@ export default function Home() {
             transition={{ type: "spring", stiffness: 300, damping: 20 }}
             onHoverStart={moveNoButton}
             onClick={moveNoButton}
-            className="absolute md:static z-20"
+            className="z-20 p-2"
           >
             <Button
               variant="secondary"

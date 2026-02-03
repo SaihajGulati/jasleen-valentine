@@ -65,7 +65,7 @@ export default function SuccessPage() {
                         </p>
                         <hr className="border-purple-200 my-2" />
                         <p>
-                            <strong className="text-black">Surprise Level:</strong>{" "}
+                            <strong className="text-black">Knowing Level:</strong>{" "}
                             {preferences.surpriseLevel}% - <span className="text-purple-600 italic">{preferences.surpriseText}</span>
                         </p>
                         <p>
@@ -86,7 +86,7 @@ export default function SuccessPage() {
                         ✅ Saved!
                     </p>
                     <p className="text-black italic">
-                        Can't wait to see you!
+                        can't wait to see youuuu
                     </p>
                 </div>
             </Card>
